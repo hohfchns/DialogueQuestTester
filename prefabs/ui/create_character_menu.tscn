@@ -1,0 +1,147 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsw6sarig3ypq"]
+
+[ext_resource type="Theme" uid="uid://b43o8w87vgskk" path="res://addons/dialogue_quest/resources/themes/default/default_theme.tres" id="1_uyfav"]
+[ext_resource type="Script" path="res://scripts/ui/create_character_menu.gd" id="2_hrlbd"]
+
+[node name="CreateCharacterMenu" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_uyfav")
+script = ExtResource("2_hrlbd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = " X "
+flat = true
+
+[node name="Margin" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="VBoxContainer/Margin"]
+layout_mode = 2
+
+[node name="Grid" type="HBoxContainer" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="IdEntry" type="MarginContainer" parent="VBoxContainer/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/VBox/Grid/IdEntry"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/VBox/Grid/IdEntry/VBoxContainer"]
+layout_mode = 2
+text = "Identifier"
+horizontal_alignment = 1
+
+[node name="IdInput" type="LineEdit" parent="VBoxContainer/Margin/VBox/Grid/IdEntry/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NameEntry" type="MarginContainer" parent="VBoxContainer/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/VBox/Grid/NameEntry"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/VBox/Grid/NameEntry/VBoxContainer"]
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="VBoxContainer/Margin/VBox/Grid/NameEntry/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ColorEntry" type="MarginContainer" parent="VBoxContainer/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/VBox/Grid/ColorEntry"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/VBox/Grid/ColorEntry/VBoxContainer"]
+layout_mode = 2
+text = "Color"
+horizontal_alignment = 1
+
+[node name="ColorInput" type="ColorPickerButton" parent="VBoxContainer/Margin/VBox/Grid/ColorEntry/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "."
+
+[node name="Portrait" type="MarginContainer" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/VBox/Portrait"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/VBox/Portrait/VBoxContainer"]
+layout_mode = 2
+text = "Portrait"
+horizontal_alignment = 1
+
+[node name="PortraitPathInput" type="LineEdit" parent="VBoxContainer/Margin/VBox/Portrait/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+editable = false
+
+[node name="PortraitBrowseButton" type="Button" parent="VBoxContainer/Margin/VBox/Portrait/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = " ... "
+
+[node name="PortraitFileDialog" type="FileDialog" parent="VBoxContainer/Margin/VBox/Portrait/VBoxContainer"]
+unique_name_in_owner = true
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg", "*.svg", "*.webp")
+
+[node name="Create" type="MarginContainer" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/VBox/Create"]
+layout_mode = 2
+
+[node name="CreateButton" type="Button" parent="VBoxContainer/Margin/VBox/Create/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Create"
