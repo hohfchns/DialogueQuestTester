@@ -12,12 +12,14 @@ config_version=5
 
 config/name="DialogueQuestTester"
 run/main_scene="res://prefabs/ui/main_screen.tscn"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 DialogueQuest="*res://addons/dialogue_quest/scripts/dialogue_quest_interface.gd"
+Settings="*res://scripts/global/settings.gd"
 
 [dialogue_quest]
 

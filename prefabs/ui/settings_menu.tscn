@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq4v7pevxedld"]
+
+[ext_resource type="Theme" uid="uid://b43o8w87vgskk" path="res://addons/dialogue_quest/resources/themes/default/default_theme.tres" id="1_3jv7n"]
+[ext_resource type="Script" path="res://scripts/ui/settings_menu.gd" id="2_huquy"]
+
+[node name="SettingsMenu" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.5
+offset_top = -147.0
+offset_right = 129.5
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_3jv7n")
+script = ExtResource("2_huquy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = " X "
+flat = true
+
+[node name="Margin" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="VBoxContainer/Margin"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="RTLText" type="MarginContainer" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/Margin/VBox/RTLText"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/VBox/RTLText/VBoxContainer"]
+layout_mode = 2
+text = "Right To Left Text"
+
+[node name="RTLTextCheckbox" type="CheckBox" parent="VBoxContainer/Margin/VBox/RTLText/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="TextSpeed" type="MarginContainer" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/VBox/TextSpeed"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/VBox/TextSpeed/VBoxContainer"]
+layout_mode = 2
+text = "Text Speed
+(characters per second)"
+horizontal_alignment = 1
+
+[node name="TextSpeedInput" type="LineEdit" parent="VBoxContainer/Margin/VBox/TextSpeed/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="Apply" type="MarginContainer" parent="VBoxContainer/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/VBox/Apply"]
+layout_mode = 2
+
+[node name="ApplyButton" type="Button" parent="VBoxContainer/Margin/VBox/Apply/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Apply"

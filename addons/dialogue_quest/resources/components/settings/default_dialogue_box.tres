@@ -5,3 +5,8 @@
 [resource]
 script = ExtResource("1_jmbe5")
 letters_per_second = 20.0
+layout_direction_box = 0
+layout_direction_name = 3
+layout_direction_text = 0
+text_direction_name = 0
+text_direction_text = 0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdbosm8b8nl7u"]
+[gd_scene load_steps=12 format=3 uid="uid://cdbosm8b8nl7u"]
 
 [ext_resource type="Theme" uid="uid://b43o8w87vgskk" path="res://addons/dialogue_quest/resources/themes/default/default_theme.tres" id="1_x52xv"]
 [ext_resource type="Script" path="res://scripts/ui/main_screen.gd" id="2_2kft4"]
 [ext_resource type="PackedScene" uid="uid://cfk008pj0rpwm" path="res://prefabs/ui/window_sizer.tscn" id="2_aobv4"]
 [ext_resource type="PackedScene" uid="uid://ttdif58g3l3i" path="res://addons/dialogue_quest/prefabs/ui/dialogue/components/dialogue_box/dialogue_box.tscn" id="4_51x4x"]
 [ext_resource type="PackedScene" uid="uid://dsw6sarig3ypq" path="res://prefabs/ui/create_character_menu.tscn" id="4_ve8rl"]
+[ext_resource type="PackedScene" uid="uid://cq4v7pevxedld" path="res://prefabs/ui/settings_menu.tscn" id="5_25ohk"]
 [ext_resource type="PackedScene" uid="uid://dye384gy0fmiu" path="res://addons/dialogue_quest/prefabs/ui/dialogue/components/choice_menu/choice_menu.tscn" id="5_54to3"]
 [ext_resource type="Script" path="res://addons/dialogue_quest/scripts/ui/dialogue/components/dialogue_player.gd" id="6_xdbva"]
 [ext_resource type="Script" path="res://addons/dialogue_quest/scripts/ui/dialogue/components/resources/settings/dialogue_player_settings.gd" id="7_v3os3"]
@@ -51,6 +52,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4qlwc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel"]
 layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
 
 [node name="CreateCharacterButton" type="Button" parent="VBoxContainer/Panel/HBoxContainer"]
 unique_name_in_owner = true
@@ -172,7 +179,12 @@ offset_top = -130.5
 offset_right = 129.5
 offset_bottom = 130.5
 
+[node name="SettingsMenu" parent="CanvasLayer" instance=ExtResource("5_25ohk")]
+unique_name_in_owner = true
+visible = false
+
 [node name="DialogueBox" parent="CanvasLayer" instance=ExtResource("4_51x4x")]
+unique_name_in_owner = true
 visible = false
 
 [node name="ChoiceMenu" parent="CanvasLayer/DialogueBox" instance=ExtResource("5_54to3")]
