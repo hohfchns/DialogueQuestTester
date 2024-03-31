@@ -186,13 +186,27 @@ visible = false
 [node name="DialogueBox" parent="CanvasLayer" instance=ExtResource("4_51x4x")]
 unique_name_in_owner = true
 visible = false
+offset_top = 106.0
+offset_bottom = 284.0
+text = ""
 
-[node name="ChoiceMenu" parent="CanvasLayer/DialogueBox" instance=ExtResource("5_54to3")]
-layout_mode = 2
+[node name="ChoiceMenu" parent="CanvasLayer" instance=ExtResource("5_54to3")]
+visible = false
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 814.0
+offset_top = 392.0
+offset_right = 913.0
+offset_bottom = 479.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="DialoguePlayer" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("dialogue_box", "choice_menu")]
 unique_name_in_owner = true
 script = ExtResource("6_xdbva")
 settings = SubResource("Resource_mm2cm")
 dialogue_box = NodePath("../DialogueBox")
-choice_menu = NodePath("../DialogueBox/ChoiceMenu")
+choice_menu = NodePath("../ChoiceMenu")
