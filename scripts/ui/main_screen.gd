@@ -26,6 +26,8 @@ var _settings_menu: Control = %SettingsMenu
 
 @onready
 var _run_button: Button = %RunButton
+@onready
+var _stop_button: Button = %StopButton
 
 @onready
 var _dialogue_player: DQDialoguePlayer = %DialoguePlayer
@@ -45,6 +47,7 @@ func _ready() -> void:
 	_settings_btn.pressed.connect(_settings_menu.show)
 	
 	_run_button.pressed.connect(_on_run)
+	_stop_button.pressed.connect(_on_stop)
 	
 	_dialogue_box.settings = Settings.dialogue_box_settings
 	Settings.dialogue_box_settings_changed.connect(_on_dialogue_box_settings_changed)
@@ -82,6 +85,9 @@ func _on_dialogue_chosen(dialogue: String) -> void:
 
 func _on_run() -> void:
 	_dialogue_player.play(_dialogue_input.text)
+
+func _on_stop() -> void:
+	_dialogue_player.stop()
 
 func _on_dialogue_box_settings_changed(new_settings: DQDialogueBoxSettings) -> void:
 	_dialogue_box.settings = new_settings

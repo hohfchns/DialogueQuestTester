@@ -11,12 +11,32 @@ var choice_menu: DQChoiceMenu : set = set_choice_menu, get = get_choice_menu
 
 var autoplaying: bool = false
 
+var _lock: bool = false
+var _stop_requested: bool = false
+
 func _ready() -> void:
 	DialogueQuest.Inputs.accept_released.connect(accept)
 	if settings.autoplay_enabled and settings.autoplay_on_start:
 		autoplaying = true
 
 func play(dialogue_path: String) -> void:
+	if _lock:
+		var s := "DialogueQuest | Player | Cannot run multiple dialogue instances per player."
+		DialogueQuest.error.emit(s)
+		assert(false, s)
+		return
+	
+	
+	_lock = true
+	_stop_requested = false
+	await _play(dialogue_path)
+	_lock = false
+
+func stop() -> void:
+	if _lock:
+		_stop_requested = true
+
+func _play(dialogue_path: String) -> void:
 	var parsed := DQDqdParser.parse_from_file(dialogue_path)
 	if not parsed.size():
 		return
@@ -26,6 +46,9 @@ func play(dialogue_path: String) -> void:
 	
 	var correct_branch: bool = true
 	for p in parsed:
+		if _stop_requested:
+			break
+		
 		p.solve_flags()
 		
 		if p as DQDqdParser.DqdSection.SectionBranch != null:
@@ -40,10 +63,9 @@ func play(dialogue_path: String) -> void:
 					else:
 						correct_branch = false
 				DQDqdParser.DqdSection.SectionBranch.Type.FLAG:
-					if DialogueQuest.Flags.is_raised(p.expression):
-						correct_branch = true
-					else:
-						correct_branch = false
+					correct_branch = DialogueQuest.Flags.is_raised(p.expression)
+				DQDqdParser.DqdSection.SectionBranch.Type.NO_FLAG:
+					correct_branch = not DialogueQuest.Flags.is_raised(p.expression)
 				DQDqdParser.DqdSection.SectionBranch.Type.EVALUATE:
 					var res: Variant = DQScriptingHelper.evaluate_expression(p.expression, DialogueQuest)
 					correct_branch = false
@@ -80,9 +102,13 @@ func play(dialogue_path: String) -> void:
 			
 			if settings.autoplay_enabled and autoplaying:
 				await dialogue_box.all_text_shown
+				if _stop_requested:
+					break
 				get_tree().create_timer(settings.autoplay_delay_sec).timeout.connect(accept)
 			
 			await dialogue_box.proceed
+			if _stop_requested:
+				break
 		elif p as DQDqdParser.DqdSection.SectionRaiseDQSignal != null:
 			p = p as DQDqdParser.DqdSection.SectionRaiseDQSignal
 			DialogueQuest.Signals.dialogue_signal.emit(p.params)

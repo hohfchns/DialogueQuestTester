@@ -101,6 +101,7 @@ class DqdSection:
 			CHOICE,
 			EVALUATE,
 			FLAG,
+			NO_FLAG,
 			END
 		}
 		
@@ -179,7 +180,7 @@ static func solve_flags(in_string: String) -> String:
 		var flag_name := found[0].strings[1]
 		var flag_value := DialogueQuest.Flags.get_flag(flag_name)
 		if flag_value == null:
-			flag_value = 0
+			flag_value = "null"
 		return in_string.replace(flag_syntax, str(flag_value))
 	else:
 		return in_string
@@ -336,6 +337,9 @@ static func _parse_branch(pipeline: PackedStringArray):
 			section.expression = DQScriptingHelper.trim_whitespace(pipeline[2])
 		"flag":
 			section.type = DqdSection.SectionBranch.Type.FLAG
+			section.expression = DQScriptingHelper.remove_whitespace(pipeline[2])
+		"no_flag":
+			section.type = DqdSection.SectionBranch.Type.NO_FLAG
 			section.expression = DQScriptingHelper.remove_whitespace(pipeline[2])
 		"evaluate":
 			section.type = DqdSection.SectionBranch.Type.EVALUATE
