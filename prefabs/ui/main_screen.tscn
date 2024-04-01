@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdbosm8b8nl7u"]
+[gd_scene load_steps=13 format=3 uid="uid://cdbosm8b8nl7u"]
 
 [ext_resource type="Theme" uid="uid://b43o8w87vgskk" path="res://addons/dialogue_quest/resources/themes/default/default_theme.tres" id="1_x52xv"]
 [ext_resource type="Script" path="res://scripts/ui/main_screen.gd" id="2_2kft4"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dye384gy0fmiu" path="res://addons/dialogue_quest/prefabs/ui/dialogue/components/choice_menu/choice_menu.tscn" id="5_54to3"]
 [ext_resource type="Script" path="res://addons/dialogue_quest/scripts/ui/dialogue/components/dialogue_player.gd" id="6_xdbva"]
 [ext_resource type="Script" path="res://addons/dialogue_quest/scripts/ui/dialogue/components/resources/settings/dialogue_player_settings.gd" id="7_v3os3"]
+[ext_resource type="PackedScene" uid="uid://drovbpmmh041" path="res://prefabs/ui/error_message.tscn" id="8_y2xug"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qlwc"]
 bg_color = Color(0.333333, 0.156863, 0.027451, 0.392157)
@@ -203,6 +204,13 @@ offset_right = 913.0
 offset_bottom = 479.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="ErrorMessage" parent="CanvasLayer" instance=ExtResource("8_y2xug")]
+visible = false
+offset_left = -119.5
+offset_top = -57.5
+offset_right = 119.5
+offset_bottom = 57.5
 
 [node name="DialoguePlayer" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("dialogue_box", "choice_menu")]
 unique_name_in_owner = true
