@@ -1,5 +1,9 @@
 # DialogueQuestTester
 
+## User Guide
+
+For information on how to write dialogue, see the [DialogueQuest User Guide](https://github.com/hohfchns/DialogueQuest/blob/main/docs/user_manual.pdf).
+
 ## Usage
 
 - Create a folder on your computer for dialogues and characters
@@ -9,5 +13,4 @@
 - Choose the dialogue from the dropdown
 - Press `Run`
 
-*Note - it is recommended to run with console, as it will show useful error messages.*
 
