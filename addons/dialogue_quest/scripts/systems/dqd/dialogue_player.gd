@@ -32,7 +32,6 @@ var _stop_requested: bool = false
 
 var _correct_branch: int = 0
 var _current_branch: int = 0
-var _is_continuous_branch: bool = false
 
 func _ready() -> void:
 	DialogueQuest.Inputs.accept_released.connect(accept)
@@ -40,6 +39,13 @@ func _ready() -> void:
 		autoplaying = true
 
 func play(dialogue_path: String) -> void:
+	var parsed := DQDqdParser.parse_from_file(dialogue_path)
+	if not parsed.size():
+		return
+
+	play_sections(parsed)
+
+func play_sections(sections: Array[DQDqdParser.DqdSection]) -> void:
 	if _lock:
 		var s := "DialogueQuest | Player | Cannot run multiple dialogue instances per player."
 		DialogueQuest.error.emit(s)
@@ -48,7 +54,7 @@ func play(dialogue_path: String) -> void:
 	
 	_lock = true
 	_stop_requested = false
-	await _play(dialogue_path)
+	await _play(sections)
 	_lock = false
 
 func stop() -> void:
@@ -62,19 +68,13 @@ func _wait_for_input() -> void:
 		
 	await dialogue_box.proceed
 
-func _play(dialogue_path: String) -> void:
-	var parsed := DQDqdParser.parse_from_file(dialogue_path)
-	if not parsed.size():
-		return
-	
+func _play(sections: Array[DQDqdParser.DqdSection]) -> void:
 	_correct_branch = 0
-	_current_branch = 0
-	_is_continuous_branch = false
 	
 	dialogue_box.show()
 	DialogueQuest.Signals.dialogue_started.emit()
 	
-	for section in parsed:
+	for section in sections:
 		if _stop_requested:
 			break
 		
@@ -113,15 +113,10 @@ func _handle_branch(section: DQDqdParser.DqdSection.SectionBranch) -> void:
 	if section.type == DQDqdParser.DqdSection.SectionBranch.Type.END:
 		_current_branch -= 1
 		_correct_branch = min(_current_branch, _correct_branch)
-		_is_continuous_branch = false
 		return
 	
-	if section.type == DQDqdParser.DqdSection.SectionBranch.Type.CHOICE:
-		_is_continuous_branch = true
-	
 	if _correct_branch != _current_branch:
-		if not _is_continuous_branch:
-			_current_branch += 1
+		_current_branch += 1
 		return
 	
 	match section.type:
