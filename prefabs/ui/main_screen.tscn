@@ -197,8 +197,8 @@ visible = false
 [node name="DialogueBox" parent="CanvasLayer" instance=ExtResource("4_51x4x")]
 unique_name_in_owner = true
 visible = false
-offset_top = 106.0
-offset_bottom = 284.0
+offset_top = -260.0
+offset_bottom = -74.0
 text = ""
 
 [node name="ChoiceMenu" parent="CanvasLayer" instance=ExtResource("5_54to3")]
