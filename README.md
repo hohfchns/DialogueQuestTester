@@ -4,6 +4,8 @@ A standalone program that allows running and testing [DialogueQuest](https://git
 
 It's main purpose is to allow non-coders to write dialogue without requiring technical knowledge.
 
+![324165208-b662cf16-5ddd-45c3-a2fd-a26a97851627](https://github.com/hohfchns/DialogueQuestTester/assets/57037334/ac20fd75-4226-4781-98d2-1b94ccb7be83)
+
 ## User Guide
 
 For information on how to write dialogue, see the [DialogueQuest User Guide](https://github.com/hohfchns/DialogueQuest/blob/main/docs/user_manual.pdf).
