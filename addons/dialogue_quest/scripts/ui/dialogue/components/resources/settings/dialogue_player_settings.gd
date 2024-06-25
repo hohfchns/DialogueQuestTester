@@ -15,6 +15,25 @@ var autoplay_delay_sec: float = 0.5
 @export
 var autoplay_on_start: bool = true
 
+@export_group("Skipping", "skip_")
+@export
+var skip_enabled: bool = false :
+	set(value):
+		skip_enabled = value
+		notify_property_list_changed()
+
+## How many paragraphs to skip per seconds
+@export
+var skip_speed: int = 5
+
+## Whether to keep skipping after a choice is made
+@export
+var skip_after_choices: bool = false
+
+## Whether to stop skipping when a dialogue is over
+@export
+var skip_stop_on_dialogue_end: bool = true
+
 @export_group("Experimental")
 ## If enabled, call statements will create a script and run it if the expression evaluation has failed
 @export
@@ -23,4 +42,7 @@ var run_expressions_as_script: bool = false
 func _validate_property(property: Dictionary) -> void:
 	if property.name != "autoplay_enabled" and property.name.begins_with("autoplay_"):
 		if not autoplay_enabled:
+			property.usage = PROPERTY_USAGE_NO_EDITOR
+	elif property.name != "skip_enabled" and property.name.begins_with("skip_"):
+		if not skip_enabled:
 			property.usage = PROPERTY_USAGE_NO_EDITOR

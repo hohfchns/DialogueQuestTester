@@ -71,7 +71,7 @@ func _on_dir_submitted(dir: String):
 		return
 	for i in _dialogue_input_browse.get_popup().item_count:
 		_dialogue_input_browse.get_popup().remove_item(0)
-	var dialogues := DQFilesystemHelper.get_all_files(dir, "dqd")
+	var dialogues := DQFilesystemHelper.get_all_files(dir, true, ["dqd"])
 	for d in dialogues:
 		_dialogue_input_browse.get_popup().add_item(d)
 	
