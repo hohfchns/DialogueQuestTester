@@ -1,0 +1,93 @@
+[gd_scene load_steps=8 format=3 uid="uid://ck2ke5f2fqplc"]
+
+[ext_resource type="Texture2D" uid="uid://bmqmqj154o5q3" path="res://art/icons/arrow_down.png" id="1_0maa8"]
+[ext_resource type="Script" path="res://scripts/ui/flag_entry.gd" id="1_1ktw8"]
+[ext_resource type="Texture2D" uid="uid://b5wa58rrxb85n" path="res://art/icons/trash_normal.png" id="1_6f7tr"]
+[ext_resource type="Texture2D" uid="uid://tyx03su0eb0k" path="res://art/icons/arrow_up.png" id="2_f13js"]
+[ext_resource type="Texture2D" uid="uid://cs0uk4kk0ha2n" path="res://art/icons/trash_pressed.png" id="2_my0cu"]
+[ext_resource type="Texture2D" uid="uid://c682lsgw51ddh" path="res://art/icons/trash_hovered.png" id="3_byyxq"]
+[ext_resource type="Texture2D" uid="uid://n5vav4w7ifjo" path="res://art/icons/trash_disabled.png" id="4_7u5rj"]
+
+[node name="FlagEntry" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1ktw8")
+identifier = "is_player_ranger"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Identifier" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "is_player_ranger"
+
+[node name="Edit" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="EditBoolean" type="CheckButton" parent="MarginContainer/HBoxContainer/Edit"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EditStringlike" type="LineEdit" parent="MarginContainer/HBoxContainer/Edit"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+expand_to_text_length = true
+
+[node name="EditNumber" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Edit"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+layout_mode = 2
+
+[node name="EditNumberDown" type="TextureButton" parent="MarginContainer/HBoxContainer/Edit/EditNumber"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture_normal = ExtResource("1_0maa8")
+stretch_mode = 5
+
+[node name="EditNumberText" type="LineEdit" parent="MarginContainer/HBoxContainer/Edit/EditNumber"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+alignment = 1
+expand_to_text_length = true
+
+[node name="EditNumberUp" type="TextureButton" parent="MarginContainer/HBoxContainer/Edit/EditNumber"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture_normal = ExtResource("2_f13js")
+stretch_mode = 5
+
+[node name="EditUnrecognized" type="LineEdit" parent="MarginContainer/HBoxContainer/Edit"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+alignment = 1
+editable = false
+expand_to_text_length = true
+
+[node name="DeleteButton" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture_normal = ExtResource("1_6f7tr")
+texture_pressed = ExtResource("2_my0cu")
+texture_hover = ExtResource("3_byyxq")
+texture_disabled = ExtResource("4_7u5rj")
+texture_focused = ExtResource("3_byyxq")
+stretch_mode = 5

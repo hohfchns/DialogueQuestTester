@@ -22,7 +22,13 @@ var _create_character_menu: Control = %CreateCharacterMenu
 var _settings_btn: Button = %SettingsButton
 
 @onready
+var _flags_btn: Button = %FlagsButton
+
+@onready
 var _settings_menu: Control = %SettingsMenu
+
+@onready
+var _flags_menu: Control = %FlagsMenu
 
 @onready
 var _run_button: Button = %RunButton
@@ -45,6 +51,7 @@ func _ready() -> void:
 	
 	_create_character_btn.pressed.connect(_create_character_menu.show)
 	_settings_btn.pressed.connect(_settings_menu.show)
+	_flags_btn.pressed.connect(_flags_menu.show)
 	
 	_run_button.pressed.connect(_on_run)
 	_stop_button.pressed.connect(_on_stop)
