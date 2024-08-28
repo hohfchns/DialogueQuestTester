@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="DialogueQuestTester"
-config/version="0.6.0-rc1"
+config/version="0.1.0"
 run/main_scene="res://prefabs/ui/main_screen.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.png"
 
 [autoload]
