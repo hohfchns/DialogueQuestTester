@@ -25,6 +25,10 @@ script = ExtResource("7_v3os3")
 autoplay_enabled = false
 autoplay_delay_sec = 0.5
 autoplay_on_start = true
+skip_enabled = false
+skip_speed = 5
+skip_after_choices = false
+skip_stop_on_dialogue_end = true
 run_expressions_as_script = false
 
 [node name="MainScreen" type="PanelContainer"]
@@ -114,7 +118,7 @@ text = "..."
 [node name="DialogueQuestDirDialog" type="FileDialog" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/DialogueQuestDirBrowse"]
 unique_name_in_owner = true
 title = "Open a Directory"
-size = Vector2i(637, 154)
+size = Vector2i(637, 174)
 theme = ExtResource("1_x52xv")
 ok_button_text = "Select Current Folder"
 file_mode = 2
@@ -156,8 +160,6 @@ layout_mode = 2
 text = "V"
 flat = false
 item_count = 1
-popup/item_0/text = ""
-popup/item_0/id = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Margin/VBoxContainer"]
 layout_mode = 2

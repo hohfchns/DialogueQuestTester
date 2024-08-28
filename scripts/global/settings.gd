@@ -6,7 +6,7 @@ const CACHE_FILE_PATH := &"user://cache"
 
 signal dialogue_box_settings_changed(new_settings: DQDialogueBoxSettings)
 
-var dialogue_box_settings: DQDialogueBoxSettings = preload("res://addons/dialogue_quest/resources/components/settings/default_dialogue_box.tres") :
+var dialogue_box_settings: DQDialogueBoxSettings = preload("res://addons/dialogue_quest/resources/components/settings/default_dialogue_box_settings.tres") :
 	set(value):
 		dialogue_box_settings = value
 		dialogue_box_settings_changed.emit(value)
