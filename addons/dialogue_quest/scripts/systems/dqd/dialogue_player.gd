@@ -63,6 +63,15 @@ var _current_bbcodes: Dictionary = {}
 func _ready() -> void:
 	DialogueQuest.Inputs.accept_released.connect(accept)
 	
+	if not dialogue_box:
+		return
+	
+	if not dialogue_box.is_node_ready():
+		await dialogue_box.ready
+	
+	if not choice_menu.is_node_ready():
+		await choice_menu.ready
+	
 	if settings.autoplay_enabled:
 		dialogue_box.auto_toggle_requested.connect(_on_auto_toggle_requested)
 		dialogue_box.get_auto_button().show()
@@ -165,7 +174,7 @@ func get_choice_menu() -> DQChoiceMenu:
 	return choice_menu
 
 func accept() -> void:
-	if dialogue_box.visible:
+	if dialogue_box and dialogue_box.visible:
 		dialogue_box.accept()
 
 ## Returns an array consisting of dictionaries with three variables:
@@ -242,10 +251,25 @@ func _handle_branch(section: DQDqdParser.DqdSection.SectionBranch) -> void:
 				_correct_branch += 1
 				DialogueQuest.Flags.confirm_choice(section.expression)
 		DQDqdParser.DqdSection.SectionBranch.Type.FLAG:
-			if DialogueQuest.Flags.is_raised(section.expression):
-				_correct_branch += 1
+			for flag in section.expressions:
+				if DialogueQuest.Flags.is_raised(flag):
+					_correct_branch += 1
+					break
 		DQDqdParser.DqdSection.SectionBranch.Type.NO_FLAG:
-			if not DialogueQuest.Flags.is_raised(section.expression):
+			var result: bool = true
+			for flag in section.expressions:
+				if DialogueQuest.Flags.is_raised(flag):
+					result = false
+					break
+			if result:
+				_correct_branch += 1
+		DQDqdParser.DqdSection.SectionBranch.Type.FLAGS:
+			var result: bool = true
+			for flag in section.expressions:
+				if not DialogueQuest.Flags.is_raised(flag):
+					result = false
+					break
+			if result:
 				_correct_branch += 1
 		DQDqdParser.DqdSection.SectionBranch.Type.EVALUATE:
 			var res: Variant = DQScriptingHelper.evaluate_expression(section.expression, DialogueQuest)
