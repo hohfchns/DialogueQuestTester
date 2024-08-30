@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdbosm8b8nl7u"]
+[gd_scene load_steps=14 format=3 uid="uid://cdbosm8b8nl7u"]
 
 [ext_resource type="Theme" uid="uid://b43o8w87vgskk" path="res://addons/dialogue_quest/resources/themes/default/default_theme.tres" id="1_x52xv"]
 [ext_resource type="Script" path="res://scripts/ui/main_screen.gd" id="2_2kft4"]
 [ext_resource type="PackedScene" uid="uid://cfk008pj0rpwm" path="res://prefabs/ui/window_sizer.tscn" id="2_aobv4"]
 [ext_resource type="PackedScene" uid="uid://ttdif58g3l3i" path="res://addons/dialogue_quest/prefabs/ui/dialogue/components/dialogue_box/dialogue_box.tscn" id="4_51x4x"]
+[ext_resource type="PackedScene" uid="uid://ds54hrp16apj5" path="res://addons/dialogue_quest/prefabs/ui/editor/dialogue_quest_menu.tscn" id="4_hqq0k"]
 [ext_resource type="PackedScene" uid="uid://dsw6sarig3ypq" path="res://prefabs/ui/create_character_menu.tscn" id="4_ve8rl"]
 [ext_resource type="PackedScene" uid="uid://cq4v7pevxedld" path="res://prefabs/ui/settings_menu.tscn" id="5_25ohk"]
 [ext_resource type="PackedScene" uid="uid://dye384gy0fmiu" path="res://addons/dialogue_quest/prefabs/ui/dialogue/components/choice_menu/choice_menu.tscn" id="5_54to3"]
@@ -46,76 +47,81 @@ script = ExtResource("2_2kft4")
 [node name="WindowSizer" parent="." node_paths=PackedStringArray("_main_screen") instance=ExtResource("2_aobv4")]
 _main_screen = NodePath("..")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Tester" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
+[node name="Panel" type="PanelContainer" parent="Tester"]
 layout_mode = 2
 theme = ExtResource("1_x52xv")
 theme_type_variation = &"PanelContainerForeground"
 theme_override_styles/panel = SubResource("StyleBoxFlat_4qlwc")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Tester/Panel"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer/Panel/HBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Tester/Panel/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Settings"
 
-[node name="CreateCharacterButton" type="Button" parent="VBoxContainer/Panel/HBoxContainer"]
+[node name="CreateCharacterButton" type="Button" parent="Tester/Panel/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Create Character"
 
-[node name="Margin" type="MarginContainer" parent="VBoxContainer"]
+[node name="DialogueQuestMenuButton" type="CheckButton" parent="Tester/Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "DialogueQuest Menu"
+
+[node name="Margin" type="MarginContainer" parent="Tester"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tester/Margin"]
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tester/Margin/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Tester/Margin/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Tester/Margin/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "DialogueQuest directory"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="Tester/Margin/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "The folder on your computer where DialogueQuest will look for files (dialogues, characters, etc.)"
 mouse_filter = 0
 text = "|?|"
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Tester/Margin/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Tester/Margin/VBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="DialogueQuestDirInput" type="LineEdit" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="DialogueQuestDirInput" type="LineEdit" parent="Tester/Margin/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "C:\\the_folder_where_dialogues_are"
 
-[node name="DialogueQuestDirBrowse" type="Button" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="DialogueQuestDirBrowse" type="Button" parent="Tester/Margin/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "..."
 
-[node name="DialogueQuestDirDialog" type="FileDialog" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/DialogueQuestDirBrowse"]
+[node name="DialogueQuestDirDialog" type="FileDialog" parent="Tester/Margin/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/DialogueQuestDirBrowse"]
 unique_name_in_owner = true
 title = "Open a Directory"
 size = Vector2i(637, 174)
@@ -124,29 +130,29 @@ ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Margin/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Tester/Margin/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Tester/Margin/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="Tester/Margin/VBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Dialogue"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Label2" type="Label" parent="Tester/Margin/VBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "The name or full file path of the dialogue to run."
 mouse_filter = 0
 text = "|?|"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Tester/Margin/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="DialogueInput" type="LineEdit" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="DialogueInput" type="LineEdit" parent="Tester/Margin/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -154,29 +160,29 @@ placeholder_text = "example_dialogue"
 alignment = 1
 expand_to_text_length = true
 
-[node name="DialogueInputBrowse" type="MenuButton" parent="VBoxContainer/Margin/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="DialogueInputBrowse" type="MenuButton" parent="Tester/Margin/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "V"
 flat = false
 item_count = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Margin/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Tester/Margin/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Margin/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Tester/Margin/VBoxContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="RunButton" type="Button" parent="VBoxContainer/Margin/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="RunButton" type="Button" parent="Tester/Margin/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Run"
 
-[node name="StopButton" type="Button" parent="VBoxContainer/Margin/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="StopButton" type="Button" parent="Tester/Margin/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -224,9 +230,27 @@ offset_top = -57.5
 offset_right = 119.5
 offset_bottom = 57.5
 
+[node name="DialogueQuestMenu" parent="CanvasLayer" instance=ExtResource("4_hqq0k")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -672.0
+offset_top = -422.0
+offset_right = 672.0
+offset_bottom = 418.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_x52xv")
+
 [node name="DialoguePlayer" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("dialogue_box", "choice_menu")]
 unique_name_in_owner = true
 script = ExtResource("6_xdbva")
 settings = SubResource("Resource_mm2cm")
 dialogue_box = NodePath("../DialogueBox")
 choice_menu = NodePath("../ChoiceMenu")
+
+[editable path="CanvasLayer/DialogueQuestMenu"]

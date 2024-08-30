@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpf36yuxsdmp7"]
+[gd_scene load_steps=2 format=3 uid="uid://ds54hrp16apj5"]
 
 [ext_resource type="Script" path="res://addons/dialogue_quest/scripts/ui/editor/dialogue_quest_menu.gd" id="1_vvpfd"]
 

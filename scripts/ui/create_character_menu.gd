@@ -62,4 +62,3 @@ func _on_create_button_press() -> void:
 	ResourceSaver.save(character, path)
 	
 	hide()
-

@@ -16,6 +16,9 @@ var _dialogue_input_browse: MenuButton = %DialogueInputBrowse
 var _create_character_btn: Button = %CreateCharacterButton
 
 @onready
+var _dialogue_quest_menu_btn: Button = %DialogueQuestMenuButton
+
+@onready
 var _create_character_menu: Control = %CreateCharacterMenu
 
 @onready
@@ -23,6 +26,11 @@ var _settings_btn: Button = %SettingsButton
 
 @onready
 var _settings_menu: Control = %SettingsMenu
+
+@onready
+var _dialogue_quest_menu: Control = %DialogueQuestMenu
+@onready
+var _dialogue_quest_error_popup: ConfirmationDialog = _dialogue_quest_menu.get_node("ErrorDialog")
 
 @onready
 var _run_button: Button = %RunButton
@@ -35,7 +43,14 @@ var _dialogue_player: DQDialoguePlayer = %DialoguePlayer
 @onready
 var _dialogue_box: DQDialogueBox = %DialogueBox
 
+
 func _ready() -> void:
+	_dialogue_quest_error_popup.about_to_popup.connect(
+		func():
+			await get_tree().process_frame
+			_dialogue_quest_error_popup.visible = false
+	)
+	
 	_dir_browse_btn.pressed.connect(_dir_dialog.popup)
 	_dir_dialog.dir_selected.connect(_on_dir_selected)
 	
@@ -45,6 +60,7 @@ func _ready() -> void:
 	
 	_create_character_btn.pressed.connect(_create_character_menu.show)
 	_settings_btn.pressed.connect(_settings_menu.show)
+	_dialogue_quest_menu_btn.toggled.connect(_dialogue_quest_menu.set_visible)
 	
 	_run_button.pressed.connect(_on_run)
 	_stop_button.pressed.connect(_on_stop)
