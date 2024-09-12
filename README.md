@@ -14,9 +14,9 @@ For information on how to write dialogue, see the [DialogueQuest User Guide](htt
 
 - Create a folder on your computer for dialogues and characters
 - In the program, set DialogueQuest Directory to aforementioned folder
-- Press the `Create Character` button and create any characters mentioned in your dialogues. Currently you have to recreate all characters, importing from Godot projects is coming soon
+- Press the `Create Character` button and create any characters mentioned in your dialogues.
 - Put your `.dqd` dialogue files in your DialogueQuest Directory
 - Choose the dialogue from the dropdown
 - Press `Run`
 
-
+*Note - as of [DialogueQuestTester v0.2.0](https://github.com/hohfchns/DialogueQuestTester/releases/tag/v0.2.0_dq-v0.7.0-rc1), you can import characters that were exported from DialogueQuest by a developer, removing the need to recreate characters.*
