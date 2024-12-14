@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/ui/main_screen.gd" id="2_2kft4"]
 [ext_resource type="PackedScene" uid="uid://cfk008pj0rpwm" path="res://prefabs/ui/window_sizer.tscn" id="2_aobv4"]
 [ext_resource type="PackedScene" uid="uid://ttdif58g3l3i" path="res://addons/dialogue_quest/prefabs/ui/dialogue/components/dialogue_box/dialogue_box.tscn" id="4_51x4x"]
-[ext_resource type="PackedScene" uid="uid://ds54hrp16apj5" path="res://addons/dialogue_quest/prefabs/ui/editor/dialogue_quest_menu.tscn" id="4_hqq0k"]
+[ext_resource type="PackedScene" uid="uid://bpf36yuxsdmp7" path="res://addons/dialogue_quest/prefabs/ui/editor/dialogue_quest_menu.tscn" id="4_hqq0k"]
 [ext_resource type="PackedScene" uid="uid://dsw6sarig3ypq" path="res://prefabs/ui/create_character_menu.tscn" id="4_ve8rl"]
 [ext_resource type="PackedScene" uid="uid://cq4v7pevxedld" path="res://prefabs/ui/settings_menu.tscn" id="5_25ohk"]
 [ext_resource type="PackedScene" uid="uid://dye384gy0fmiu" path="res://addons/dialogue_quest/prefabs/ui/dialogue/components/choice_menu/choice_menu.tscn" id="5_54to3"]

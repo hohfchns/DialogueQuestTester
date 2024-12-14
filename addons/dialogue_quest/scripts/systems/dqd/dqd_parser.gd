@@ -202,12 +202,17 @@ static func parse_from_text(text: String) -> Array[DqdSection]:
 		for statement in statements:
 			if statement.keyword == DQScriptingHelper.remove_whitespace(pipeline[0]):
 				parsed = statement.parse_function.call(pipeline)
-					
+		
+		if parsed == null:
+			var s := "DialogQuest | Dqd | Parser | Parse error at line %d | Statement `%s` not recognized" % [line_num, pipeline[0]]
+			DialogueQuest.error.emit(s)
+			assert(false, s)
+		
 		if parsed is DqdError:
 			var s: String = parsed.formatted(line_num)
 			DialogueQuest.error.emit(s)
 			assert(false, s)
-		elif parsed != null:
+		else:
 			ret.append(parsed)
 	
 	return ret
@@ -395,22 +400,18 @@ static func _parse_branch(pipeline: PackedStringArray):
 			section.type = DqdSection.SectionBranch.Type.END
 		"choice":
 			if pipeline.size() <= 2:
-				return DqdError.new(wrong_arg_count_msg % "2+")
+				return DqdError.new(wrong_arg_count_msg % 2)
+			if pipeline.size() > 3:
+				return DqdError.new(wrong_arg_count_msg % 2)
 			section.type = DqdSection.SectionBranch.Type.CHOICE
-			section.expressions = DQScriptingHelper.remove_whitespace_array(pipeline.slice(2))
+			section.expression = DQScriptingHelper.trim_whitespace(pipeline[2])
 		"flag":
-			if pipeline.size() <= 2:
-				return DqdError.new(wrong_arg_count_msg % "2+")
 			section.type = DqdSection.SectionBranch.Type.FLAG
 			section.expressions = DQScriptingHelper.remove_whitespace_array(pipeline.slice(2))
 		"no_flag":
-			if pipeline.size() <= 2:
-				return DqdError.new(wrong_arg_count_msg % "2+")
 			section.type = DqdSection.SectionBranch.Type.NO_FLAG
 			section.expressions = DQScriptingHelper.remove_whitespace_array(pipeline.slice(2))
 		"flags":
-			if pipeline.size() <= 2:
-				return DqdError.new(wrong_arg_count_msg % "2+")
 			section.type = DqdSection.SectionBranch.Type.FLAGS
 			section.expressions = DQScriptingHelper.remove_whitespace_array(pipeline.slice(2))
 		"flag>":
@@ -429,6 +430,14 @@ static func _parse_branch(pipeline: PackedStringArray):
 			section.type = DqdSection.SectionBranch.Type.EVALUATE
 			section.stringify = true
 			section.expression = "( ${%s} ) < ( %s )" % [DQScriptingHelper.trim_whitespace(pipeline[2]), DQScriptingHelper.trim_whitespace(pipeline[3])]
+		"flag!=":
+			if pipeline.size() <= 3:
+				return DqdError.new(wrong_arg_count_msg % 3)
+			if pipeline.size() > 4:
+				return DqdError.new(wrong_arg_count_msg % 3)
+			section.type = DqdSection.SectionBranch.Type.EVALUATE
+			section.stringify = true
+			section.expression = "( ${%s} ) != ( %s )" % [DQScriptingHelper.trim_whitespace(pipeline[2]), DQScriptingHelper.trim_whitespace(pipeline[3])]
 		"flag=":
 			if pipeline.size() <= 3:
 				return DqdError.new(wrong_arg_count_msg % 3)

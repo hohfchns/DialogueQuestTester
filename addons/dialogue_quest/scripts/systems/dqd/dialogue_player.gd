@@ -247,14 +247,9 @@ func _handle_branch(section: DQDqdParser.DqdSection.SectionBranch) -> void:
 	
 	match section.type:
 		DQDqdParser.DqdSection.SectionBranch.Type.CHOICE:
-			var choices := section.expressions
-			var success := false
-			for c in choices:
-				if DialogueQuest.Flags.choice_made(c):
-					success = true
-				DialogueQuest.Flags.confirm_choice(c)
-			if success:
+			if DialogueQuest.Flags.choice_made(section.expression):
 				_correct_branch += 1
+				DialogueQuest.Flags.confirm_choice(section.expression)
 		DQDqdParser.DqdSection.SectionBranch.Type.FLAG:
 			for flag in section.expressions:
 				if DialogueQuest.Flags.is_raised(flag):
