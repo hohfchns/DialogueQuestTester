@@ -66,5 +66,3 @@ static func find_sound_file(file: String, in_dir: String="") -> String:
 			return f
 
 	return ""
-
-

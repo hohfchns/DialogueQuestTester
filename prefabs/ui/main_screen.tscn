@@ -30,7 +30,7 @@ skip_enabled = false
 skip_speed = 5
 skip_after_choices = false
 skip_stop_on_dialogue_end = true
-run_expressions_as_script = false
+run_expressions_as_script = true
 
 [node name="MainScreen" type="PanelContainer"]
 anchors_preset = 13

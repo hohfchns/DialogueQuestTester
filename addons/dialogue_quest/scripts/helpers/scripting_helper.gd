@@ -24,21 +24,38 @@ const RESERVED_WORDS: PackedStringArray = [
 	"func", "class", "extends", "self", "if", "elif", "else", "while", "for",
 	"in", "break", "continue", "return", "match", "switch", "case", "const",
 	"var", "onready", "tool", "export", "signal", "preload", "assert", "yield",
-	"do", "class_name", "extends", "is", "as", "true", "false", "or", "and"
+	"do", "class_name", "extends", "is", "as", "true", "false", "or", "and", "not",
+	"null"
 ]
 
 static func replace_with_escape(from: String, what: String, with: String, escape: String) -> String:
 	var found_idx := from.find(what)
-	if found_idx == -1:
-		return from
+	
+	var new_str := ""
+	var last_idx := 0
+	while true:
+		found_idx = from.find(what, last_idx)
+		if found_idx == -1:
+			break
+		
+		if found_idx == 0:
+			new_str = with + from.substr(what.length())
+			last_idx = found_idx + what.length()
+			continue
 
-	if found_idx == 0:
-		return with + from.substr(0, what.length())
+		if from[found_idx - 1] == escape:
+			new_str += from.substr(last_idx, found_idx - last_idx - 1)
+			new_str += what
+			last_idx = found_idx + what.length()
+			continue
+		
+		new_str += from.substr(last_idx, found_idx - last_idx)
+		new_str += with
+		last_idx = found_idx + what.length()
+	
+	new_str += from.substr(last_idx)
 
-	if from.substr(found_idx - escape.length(), escape.length()) == escape:
-		return from.substr(0, found_idx - escape.length()) + from.substr(found_idx)
-
-	return from.replace(what, with)
+	return new_str
 
 static func solve_symbols(from: String, allow_escape: bool = true) -> String:
 	var s := from
@@ -104,13 +121,35 @@ static func evaluate_expression(expression: String, base_instance: Object = null
 	return res
 
 ## Takes `expression` and converts non-reserved and non-numeric words into quoted strings for evaluation.
-static func stringify_expression(expression: String) -> String:
+## If `whole` is set to `false` (default), the returned string will contain parantheses around each words, otherwise it will be per the whole expression.
+static func stringify_expression(expression: String, whole: bool = false) -> String:
 	var new_str: String = ""
 	var words: PackedStringArray = [expression]
 	if " " in expression:
 		words = expression.split(" ")
 
+	var is_whole_string: bool = false
+	var string_state: bool = false
+
 	for word in words:
+		var added_characters := 0
+		for c in word:
+			if c == '"':
+				string_state = !string_state
+				new_str += '"'
+				added_characters += 1
+			else:
+				if string_state:
+					new_str += c
+					added_characters += 1
+		
+		if added_characters == word.length():
+			new_str += " "
+			continue
+		
+		if string_state:
+			continue
+		
 		if word.is_valid_float():
 			new_str += word + " "
 			continue
@@ -127,9 +166,30 @@ static func stringify_expression(expression: String) -> String:
 			new_str += word + " "
 			continue
 
-		new_str += "\"%s\"" % word + " "
-
+		if whole:
+			new_str += '%s ' % word
+		else:
+			new_str += '"%s" ' % word
+		
+		is_whole_string = true
+	
+	if whole and is_whole_string:
+		return '"%s"' % trim_whitespace(new_str)
+	
 	return trim_whitespace(new_str)
+
+## Applies `stringify_expression` and converts it to a Variant
+## To check the error, use `result is DQScriptingHelper.Error`, as `null` is a vaslid return value
+static func expression_to_value(expression: String, whole: bool = false) -> Variant:
+	var stringified = DQScriptingHelper.stringify_expression(expression, whole)
+	if stringified == "null":
+		return null
+	
+	var as_var := str_to_var(stringified)
+	if as_var == null:
+		return Error.new()
+	
+	return as_var
 
 ## Takes `expressions` and returns string connected by a conditional `operator` of all of them
 ## If `stringify` is true, will apply the `stringify_expression` method to each
